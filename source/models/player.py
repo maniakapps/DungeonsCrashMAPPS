@@ -7,6 +7,7 @@ from source.models.room import Room
 
 @dataclass
 class Player(GameCharacter, PrintDetails):
+    """ A player class model"""
     name: str = ""
     __current_health: int = 50
     attack: int = 10
@@ -17,37 +18,51 @@ class Player(GameCharacter, PrintDetails):
     previous_room: Room = field(init=False, repr=False)
 
     def __post_init__(self):
+        """This method initializes the first item in the player inventory"""
         self.inventory.append(self.daga)
 
     def increase_stats(self, health, attack, defence):
+        """Increases the player stats
+        :param health the health to increase
+        :param attack the attck to increase
+        :param defence the defence to increase """
         self.current_health += health
         self.attack += attack
         self.defence += defence
 
     def add_item(self, item):
+        """Adds a new item to the player inventory
+        :param item the item to add to the inventory"""
         self.inventory.append(item)
         self.increase_stats(item.health, item.attack, item.defence)
 
     def loot_room(self, room):
+        """add the items in the room to the player's inventory
+        :param room the room you are in"""
         items = room.get_items()
         for item in items:
             self.add_item(item)
 
     def change_room(self, new_room):
+        """ puts the player in a new room
+        :param new_room the room to move to"""
         self.previous_room = self.current_room
         self.current_room = new_room
 
     def print_details(self):
+        """ prins the player details"""
         super(Player, self).print_details()
 
     @property
     def name(self):
+        """ Player's name getter"""
         return self.__name
 
     @name.setter
     def name(self, nm):
+        """player's name setter"""
         self.__name = nm
 
-
     def read_name(self):
+        """Ask the user for a name"""
         self.name = input("Enter your name: ")
