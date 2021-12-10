@@ -1,10 +1,10 @@
 from abc import ABC
 
-from interfaces.details import PrintDetails
-from models.game_character import GameCharacter
-from models.player import Player
-from dataclasses import dataclass, field
-from models.room import Room
+from source.interfaces.details import PrintDetails
+from source.models.game_character import GameCharacter
+from source.models.player import Player
+from dataclasses import dataclass
+from source.models.room import Room
 
 
 @dataclass(kw_only=True)

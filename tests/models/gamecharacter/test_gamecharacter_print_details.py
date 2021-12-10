@@ -2,7 +2,7 @@ import unittest
 
 import pytest as pytest
 
-from models.game_character import GameCharacter
+from source.models.game_character import GameCharacter
 
 
 class GameCharacterTestSuite(unittest.TestCase):

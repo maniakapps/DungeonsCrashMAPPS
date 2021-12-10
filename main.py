@@ -1,8 +1,8 @@
-from models.dungeon import Dungeon
-from models.game_character import GameCharacter
-from models.item import Item
-from models.player import Player
-from models.room import Room
+from source.models.dungeon import Dungeon
+from source.models.game_character import GameCharacter
+from source.models.item import Item
+from source.models.player import Player
+from source.models.room import Room
 
 
 def main(*args, **kwargs):
