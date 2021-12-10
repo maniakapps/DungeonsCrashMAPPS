@@ -1,10 +1,11 @@
-from game_character import GameCharacter
-from item import Item
+from models.game_character import GameCharacter
+from models.item import Item
 from dataclasses import dataclass
 
 
 @dataclass
 class Room:
+    """A Room model class"""
     position: int
     is_exit: bool
     items: list
@@ -46,3 +47,6 @@ class Room:
         :return a list of items
         """
         return self.items
+
+    def is_empty(self):
+        return len(self.enemies) > 0

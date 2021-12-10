@@ -1,12 +1,12 @@
 from dataclasses import dataclass
-from details import PrintDetails
+from interfaces.details import PrintDetails
 
 
 @dataclass
 class GameCharacter(PrintDetails):
     """Models a GameCharacter object"""
     name: str = ""
-    current_health: int = 50
+    __current_health: int = 50
     attack: int = 10
     defence: int = 5
 
@@ -15,10 +15,13 @@ class GameCharacter(PrintDetails):
         if there is a negative amount it sets the damage to 0
         :param amount: amount of damage taken
         i.e take_damage(10)"""
-        damage = amount - self.defence
-        if damage < 0:
-            damage = 0
-        self.current_health -= damage
+        if isinstance(amount, (int, float)):
+            damage = amount - self.defence
+            if damage < 0:
+                damage = 0
+            self.current_health -= damage
+        else:
+            raise TypeError("Only numbers are allowed.")
 
     def check_is_dead(self) -> bool:
         """Checks  a game character is dead
@@ -27,7 +30,19 @@ class GameCharacter(PrintDetails):
 
     def print_details(self):
         """Prints the game character properties"""
-        print(self.name, " Stats")
-        print("Current health: ", self.current_health)
-        print("Current attack: ", self.attack)
-        print("Current defence: ", self.defence, "\n")
+        print(self.name, "Stats")
+        print("Current health:", self.current_health)
+        print("Current attack:", self.attack)
+        print("Current defence:", self.defence)
+
+    @property
+    def current_health(self):
+        return self.__current_health
+
+    @current_health.setter
+    def current_health(self, c_h):
+        self.__current_health = c_h
+
+    @current_health.getter
+    def current_health(self):
+        return self.__current_health

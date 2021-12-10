@@ -1,14 +1,14 @@
 from dataclasses import dataclass, field
-from details import PrintDetails
-from game_character import GameCharacter
-from item import Item
-from room import Room
+from interfaces.details import PrintDetails
+from models.item import Item
+from models.game_character import GameCharacter
+from models.room import Room
 
 
 @dataclass
 class Player(GameCharacter, PrintDetails):
     name: str = ""
-    current_health: int = 50
+    __current_health: int = 50
     attack: int = 10
     defence: int = 5
     inventory: list[Item] = field(default_factory=list)
@@ -34,8 +34,23 @@ class Player(GameCharacter, PrintDetails):
             self.add_item(item)
 
     def change_room(self, new_room):
-        previous_room = self.current_room
+        self.previous_room = self.current_room
         self.current_room = new_room
 
     def print_details(self):
         super(Player, self).print_details()
+
+    @property
+    def name(self):
+        return self.__name
+
+    @name.setter
+    def name(self, nm):
+        self.__name = nm
+
+    @name.getter
+    def name(self):
+        return self.__name
+
+    def read_name(self):
+        self.name = input("Enter your name: ")
