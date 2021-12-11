@@ -22,7 +22,8 @@ class Dungeon(PrintDetails, ABC):
             print(action)
 
     def run_dungeon(self):
-        """Run the dungeon logic by printing the player details first and then hanlding the movement"""
+        """Run the dungeon logic by printing the player details first and then hanlding the movement
+        :return perform end logic"""
         print("Bienvenido al dungeon: ", self.number, "! ", self.player.name, "dentro encontrarás tesoros , pero "
                                                                               "tambien enemigos. \n Entra bajo tu "
                                                                               "propio riesgo")
@@ -42,7 +43,7 @@ class Dungeon(PrintDetails, ABC):
 
             self.handle_movement_actions(self.player.current_room)
 
-    def handle_room_with_enemy(self, room):
+    def handle_room_with_enemy(self, room: Room):
         """ Handles a room with enemies inside
         :param room a Room object"""
         enemy = room.enemies[0]
@@ -63,11 +64,12 @@ class Dungeon(PrintDetails, ABC):
         elif len(room.items) > 0:
             self.handle_room_with_chest(room)
         else:
-            self.handle_empty_room(room)
+            self.handle_empty_room()
 
-    def handle_room_with_chest(self, room):
+    def handle_room_with_chest(self, room: Room):
         """ Handle a room with a chest
-        :param room A Room object"""
+        :param room A Room object
+        :return None"""
         print("Entraste en una habitación donde hay un cofre en medio de la misma.")
         actions = ["a. Abrir el cofre.", "b. Moverse a otra habitación."]
         while True:
@@ -114,7 +116,7 @@ class Dungeon(PrintDetails, ABC):
     def handle_fight_actions(self, enemy: GameCharacter):
         """handle the fight actions
         :param enemy an Enemy object
-        :return None if b is entered"""
+        :return None if b is entered, enemy or player are dead"""
         actions = ["a. Atacar",
                    "b. Escapar"]
         while True:
@@ -145,7 +147,7 @@ class Dungeon(PrintDetails, ABC):
             if self.player.check_is_dead():
                 return
 
-    def handle_loot_actions(self, room):
+    def handle_loot_actions(self, room: Room):
         """ Handle the loot actions
         Increases the player stats with the items in the chest and clears the loot at the end.
         :param room a Room object"""
@@ -156,11 +158,11 @@ class Dungeon(PrintDetails, ABC):
             self.player.print_details()
         room.clear_loot()
 
-    def handle_movement_actions(self, room):
+    def handle_movement_actions(self, room: Room):
         """ Handle movement actions
         Where to move to?
         :param room a Room object
-        :return Nones"""
+        :return None"""
         while True:
             if room.position > 0:
                 actions = ["a. Moverse a la derecha",

@@ -15,7 +15,7 @@ class GameCharacter(PrintDetails):
         if there is a negative amount it sets the damage to 0
         :param amount: amount of damage taken
         i.e take_damage(10)"""
-        if isinstance(amount, (int, float)):
+        if isinstance(amount, (int | float)):
             damage = amount - self.defence
             if damage < 0:
                 damage = 0
@@ -36,13 +36,13 @@ class GameCharacter(PrintDetails):
         print("Current defence:", self.defence)
 
     @property
-    def current_health(self):
+    def current_health(self) -> (int | float):
+        """Current health getter
+        :return game character current health"""
         return self.__current_health
 
     @current_health.setter
-    def current_health(self, c_h):
+    def current_health(self, c_h: (int | float)):
+        """Current health setter
+        :param c_h the current health of the game character"""
         self.__current_health = c_h
-
-    @current_health.getter
-    def current_health(self):
-        return self.__current_health

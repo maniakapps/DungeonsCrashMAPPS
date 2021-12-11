@@ -23,7 +23,7 @@ class Room:
 
     def add_item(self, item: Item):
         """Adds an intem to the room if the item passed is an Item object, otherwise it raises an exception
-        :parameter item an Item object """
+        :param item an Item object """
         if isinstance(item, Item):
             # agrega el objeto a la lista de objetos
             self.items.append(item)
@@ -35,7 +35,7 @@ class Room:
     def add_enemy(self, enemy: GameCharacter):
         """Adds an enemy into the room only if it is an objet
         otherwise raises an error
-        :parameter enemy Game character object
+        :param enemy Game character object
         """
         if isinstance(enemy, GameCharacter):
             self.items.append(enemy)
@@ -49,4 +49,6 @@ class Room:
         return self.items
 
     def is_empty(self):
+        """Returns true if the room is empty
+        :return true or false"""
         return len(self.enemies) > 0

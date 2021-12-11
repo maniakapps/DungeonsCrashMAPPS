@@ -21,7 +21,7 @@ class Player(GameCharacter, PrintDetails):
         """This method initializes the first item in the player inventory"""
         self.inventory.append(self.daga)
 
-    def increase_stats(self, health, attack, defence):
+    def increase_stats(self, health: int | float, attack: int | float, defence: int | float):
         """Increases the player stats
         :param health the health to increase
         :param attack the attck to increase
@@ -30,20 +30,20 @@ class Player(GameCharacter, PrintDetails):
         self.attack += attack
         self.defence += defence
 
-    def add_item(self, item):
+    def add_item(self, item: Item):
         """Adds a new item to the player inventory
         :param item the item to add to the inventory"""
         self.inventory.append(item)
         self.increase_stats(item.health, item.attack, item.defence)
 
-    def loot_room(self, room):
+    def loot_room(self, room: Room):
         """add the items in the room to the player's inventory
         :param room the room you are in"""
         items = room.get_items()
         for item in items:
             self.add_item(item)
 
-    def change_room(self, new_room):
+    def change_room(self, new_room: Room):
         """ puts the player in a new room
         :param new_room the room to move to"""
         self.previous_room = self.current_room
@@ -54,13 +54,15 @@ class Player(GameCharacter, PrintDetails):
         super(Player, self).print_details()
 
     @property
-    def name(self):
-        """ Player's name getter"""
+    def name(self) -> str:
+        """ Player's name getter
+        :return player's name"""
         return self.__name
 
     @name.setter
-    def name(self, nm):
-        """player's name setter"""
+    def name(self, nm: str):
+        """player's name setter
+        :param nm the player's name to be set"""
         self.__name = nm
 
     def read_name(self):
